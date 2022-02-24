@@ -1,0 +1,20 @@
+version: '2'
+services:
+  db:
+    image: mongo:3.4.10
+    volumes:
+      - ./data/mongodb:/data/db
+    networks:
+      - connectin
+    ports:
+      - "27017:27017"
+  app:
+    build: ./app
+    networks:
+      - connectin
+
+    depends_on:
+      - db
+networks:
+  connectin:
+    driver: bridge
